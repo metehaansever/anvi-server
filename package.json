@@ -1,7 +1,7 @@
 {
-  "name": "nextjs-mongodb-app",
+  "name": "anvi-server",
   "version": "1.0.0",
-  "description": "Full fledged app made with Next.JS and MongoDB",
+  "description": "Anvio on Server",
   "main": "index.js",
   "scripts": {
     "dev": "next dev",
@@ -11,15 +11,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hoangvvo/nextjs-mongodb-app.git"
+    "url": ""
   },
-  "author": "Hoang Vo (https://hoangvvo.com)",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/hoangvvo/nextjs-mongodb-app/issues"
-  },
-  "homepage": "https://github.com/hoangvvo/nextjs-mongodb-app#readme",
+  "author": "",
+  "license": "",
+  "homepage": "https://anvio.com",
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.0.0",
+    "@fortawesome/fontawesome-svg-core": "^6.2.1",
+    "@fortawesome/free-brands-svg-icons": "^6.2.1",
+    "@fortawesome/free-solid-svg-icons": "^6.2.1",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "@lukeed/ms": "^2.0.0",
     "ajv": "^8.11.0",
     "bcryptjs": "^2.4.3",
