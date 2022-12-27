@@ -15,7 +15,6 @@ import styles from './Poster.module.css';
 const PosterInner = ({ user }) => {
   const contentRef = useRef();
   const [isLoading, setIsLoading] = useState(false);
-
   const { mutate } = usePostPages();
 
   const onSubmit = useCallback(
@@ -66,7 +65,7 @@ const Poster = () => {
   return (
     <Wrapper>
       <div className={styles.root}>
-        <h3 className={styles.heading}>Share your thoughts</h3>
+        <h3 className={styles.heading}>Share your project</h3>
         {loading ? (
           <LoadingDots>Loading</LoadingDots>
         ) : data?.user ? (
