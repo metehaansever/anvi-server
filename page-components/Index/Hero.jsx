@@ -9,8 +9,7 @@ import Footer from '../../components/Layout/Footer';
 const Hero = () => {
   function IconState(props) {
     const themeState = props;
-    console.log(themeState);
-    if (themeState.themeState.theme == 'light') {
+    if (themeState.theme == 'light') {
       return (
         <Image
           src="/images/anvio.png"
