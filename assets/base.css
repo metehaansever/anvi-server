@@ -2,10 +2,10 @@
 @import 'node_modules/modern-normalize/modern-normalize.css';
 
 :root {
-  --background: #fff;
-  --foreground: #000;
+  --background: #fafafa;
+  --foreground: #111;
   --accents-1: #fafafa;
-  --accents-2: #eaeaea;
+  --accents-2: #DBDBDB;
   --accents-3: #999;
   --accents-4: #888;
   --accents-5: #666;
@@ -15,6 +15,7 @@
   --success-light: #3291ff;
   --success: #0070f3;
   --success-dark: #0761d1;
+  --success-green: #4E9F3D;
   --error-light: #ff1a1a;
   --error: #e00;
   --error-dark: #c50000;
@@ -29,10 +30,10 @@
 }
 
 [data-theme='dark'] {
-  --foreground: #fff;
-  --background: #000;
+  --foreground: #fafafa;
+  --background: #111;
   --accents-8: #fafafa;
-  --accents-7: #eaeaea;
+  --accents-7: #DBDBDB;
   --accents-6: #999;
   --accents-5: #888;
   --accents-4: #666;
@@ -40,7 +41,7 @@
   --accents-2: #333;
   --accents-1: #111;
   --secondary: var(--accents-5);
-  --header-background: rgba(0, 0, 0, 0.5);
+  --header-background: #111;
   --shadow-smallest: 0 0 0 1px var(--accents-2);
   --shadow-medium: 0 0 0 1px var(--accents-2);
   --shadow-large: 0 0 0 1px var(--accents-2);
