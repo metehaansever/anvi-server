@@ -13,6 +13,7 @@
 .icon {
   font-size: 1.2rem;
   cursor: pointer;
+  color: var(--accents-7);
 }
 
 .github {
