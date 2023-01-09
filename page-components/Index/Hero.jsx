@@ -9,7 +9,7 @@ import Footer from '../../components/Layout/Footer';
 const Hero = () => {
   function IconState(props) {
     const themeState = props;
-    if (themeState.theme == 'light') {
+    if (themeState.themeState.theme == 'light') {
       return (
         <Image
           src="/images/anvio.png"
@@ -46,13 +46,11 @@ const Hero = () => {
           </Container>
           <Spacer axis="horizontal" size={1} />
           <Container>
-            <ButtonLink
-              href="https://anvio.org/"
-              type="secondary"
-              className={styles.button}
-            >
-              Anvi&apos;o
-            </ButtonLink>
+            <Link passHref href="/submit">
+              <ButtonLink type="secondary" className={styles.button}>
+                Submit
+              </ButtonLink>
+            </Link>
           </Container>
         </Container>
         <p className={styles.subtitle}>
