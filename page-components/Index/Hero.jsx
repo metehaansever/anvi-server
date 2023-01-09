@@ -3,31 +3,9 @@ import { Container, Spacer, Wrapper } from '@/components/Layout';
 import Link from 'next/link';
 import styles from './Hero.module.css';
 import Image from 'next/image';
-import { useTheme } from 'next-themes';
 import Footer from '../../components/Layout/Footer';
 
 const Hero = () => {
-  function IconState(props) {
-    const themeState = props;
-    if (themeState.themeState.theme == 'light') {
-      return (
-        <Image
-          src="/images/anvio.png"
-          alt="anvio light"
-          width={400}
-          height={400}
-        />
-      );
-    }
-    return (
-      <Image
-        src="/images/anvi-dark.png"
-        alt="anvio dark"
-        width={400}
-        height={400}
-      />
-    );
-  }
   return (
     <Wrapper>
       <div>
@@ -36,7 +14,13 @@ const Hero = () => {
             <span className={styles.anvi}>Anvi</span>
             <span className={styles.server}>Server</span>
           </h1>
-          <IconState themeState={useTheme('y')} />
+          <Image
+            className={styles.image}
+            src="/images/anvi-dark.png"
+            alt="anvio dark"
+            width={350}
+            height={350}
+          />
         </div>
         <Container justifyContent="center" className={styles.buttons}>
           <Container>
