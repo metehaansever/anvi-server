@@ -60,3 +60,6 @@
   text-align: center;
   margin: 8px 0 64px;
 }
+.image {
+  object-fit: cover;
+}

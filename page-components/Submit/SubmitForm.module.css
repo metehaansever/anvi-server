@@ -5,14 +5,8 @@
     height: calc(70vh - var(--nav-height));
     background: var(--background);
     padding: 24px;
-    /* box-shadow: var(--shadow-smallest); */
     border-radius: 8px;
-    /* transition: ease 0.2s box-shadow; */
 }  
-
-.root:hover {
-   /* box-shadow: var(--shadow-medium); */
-}
 
 .main {
     width: 100%;
