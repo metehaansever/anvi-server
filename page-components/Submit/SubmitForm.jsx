@@ -1,13 +1,21 @@
+import { useCurrentUser } from '@/lib/user';
 import { Button } from '@/components/Button';
+import { Text, TextLink } from '@/components/Text';
 import { Input, Textarea } from '@/components/Input';
 import { Wrapper, Spacer } from '@/components/Layout';
 import { fetcher } from '@/lib/fetch';
-import { usePostPages } from '@/lib/post';
+import { LoadingDots } from '@/components/LoadingDots';
+import Link from 'next/link';
 import { useCallback, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
-import styles from './LaunchForm.module.css';
+import styles from './SubmitForm.module.css';
+import YAML from 'yaml';
+import { useSubmitPages } from '@/lib/submit/hook';
 
-const Launch = () => {
+const SubmitInner = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const { mutate } = useSubmitPages();
+
   const titleRef = useRef();
   const descRef = useRef();
   const nameRef = useRef();
@@ -17,18 +25,16 @@ const Launch = () => {
   const workdirRef = useRef();
   const setupRef = useRef();
   const runRef = useRef();
-  const [isLoading, setIsLoading] = useState(false);
-  const { mutate } = usePostPages();
 
   const onSubmit = useCallback(
     async (e) => {
       e.preventDefault();
       try {
         setIsLoading(true);
-        await fetcher('/api/launch', {
+        await fetcher('/api/submit', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
+          headers: { 'Content-Type': 'application/yaml' },
+          body: YAML.stringify({
             title: titleRef.current.value,
             desc: descRef.current.value,
             name: nameRef.current.value,
@@ -50,7 +56,7 @@ const Launch = () => {
         workdirRef.current.value = '';
         setupRef.current.value = '';
         runRef.current.value = '';
-        // refresh launch lists
+        // refresh submit lists
         mutate();
       } catch (e) {
         toast.error(e.message);
@@ -183,4 +189,32 @@ const Launch = () => {
   );
 };
 
-export default Launch;
+const Submit = () => {
+  const { data, error } = useCurrentUser();
+  const loading = !data && !error;
+
+  return (
+    <Wrapper className={styles.submit_roots}>
+      <div className={styles.main_submit}>
+        <h3 className={styles.heading_submit}>Submit your project</h3>
+        {loading ? (
+          <LoadingDots>Loading</LoadingDots>
+        ) : data?.user ? (
+          <SubmitInner user={data.user} />
+        ) : (
+          <Text color="secondary">
+            Please{' '}
+            <Link href="/login" passHref>
+              <TextLink color="link" variant="highlight">
+                sign in
+              </TextLink>
+            </Link>{' '}
+            to submit
+          </Text>
+        )}
+      </div>
+    </Wrapper>
+  );
+};
+
+export default Submit;

@@ -82,3 +82,28 @@
     top: -100%;
     left: 0;
 }
+
+.submit_root {
+    width: 100%;
+  }
+
+  .main_submit{
+    background: var(--background);
+    padding: 32px;
+    box-shadow: var(--shadow-smallest);
+    border-radius: 8px;
+    height: 132px;
+    transition: ease 0.2s box-shadow;
+  }
+
+  .main_submit:hover {
+    box-shadow: var(--shadow-medium);
+  }
+
+  .heading_submit{
+    font-size: 0.85rem;
+    letter-spacing: 0.1rem;
+    margin-top: 0;
+    padding-left: 0.2rem;
+    color: var(--accents-7);
+  }
