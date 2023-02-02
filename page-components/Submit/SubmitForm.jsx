@@ -9,32 +9,33 @@ import Link from 'next/link';
 import { useCallback, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 import styles from './SubmitForm.module.css';
-import YAML from 'yaml';
-import { useSubmitPages } from '@/lib/submit/hook';
+import { useSubmitPages } from '@/lib/submission/hook';
 
 const SubmitInner = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { mutate } = useSubmitPages();
 
-  const titleRef = useRef();
-  const descRef = useRef();
-  const nameRef = useRef();
-  const emailRef = useRef();
-  const affiliationRef = useRef();
-  const webRef = useRef();
-  const workdirRef = useRef();
-  const setupRef = useRef();
-  const runRef = useRef();
+  const {
+    titleRef,
+    descRef,
+    nameRef,
+    emailRef,
+    affiliationRef,
+    webRef,
+    workdirRef,
+    setupRef,
+    runRef,
+  } = useRef();
 
   const onSubmit = useCallback(
     async (e) => {
       e.preventDefault();
       try {
         setIsLoading(true);
-        await fetcher('/api/submit', {
+        await fetcher('/api/submissions', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/yaml' },
-          body: YAML.stringify({
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
             title: titleRef.current.value,
             desc: descRef.current.value,
             name: nameRef.current.value,
@@ -47,15 +48,7 @@ const SubmitInner = () => {
           }),
         });
         toast.success('You have submit successfully');
-        titleRef.current.value = '';
-        descRef.current.value = '';
-        nameRef.current.value = '';
-        emailRef.current.value = '';
-        affiliationRef.current.value = '';
-        webRef.current.value = '';
-        workdirRef.current.value = '';
-        setupRef.current.value = '';
-        runRef.current.value = '';
+
         // refresh submit lists
         mutate();
       } catch (e) {
@@ -179,7 +172,7 @@ const SubmitInner = () => {
         </form>
         <Spacer size={1.5} axis="vertical" />
         <div className={styles.btn}>
-          <Button type="success" loading={isLoading} onSubmit={onSubmit}>
+          <Button type="success" loading={isLoading}>
             {' '}
             Submit{' '}
           </Button>
