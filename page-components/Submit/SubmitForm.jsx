@@ -195,24 +195,21 @@ const Submit = () => {
 
   return (
     <Wrapper className={styles.submit_roots}>
-      <div className={styles.main_submit}>
-        <h3 className={styles.heading_submit}>Submit your project</h3>
-        {loading ? (
-          <LoadingDots>Loading</LoadingDots>
-        ) : data?.user ? (
-          <SubmitInner user={data.user} />
-        ) : (
-          <Text color="secondary">
-            Please{' '}
-            <Link href="/login" passHref>
-              <TextLink color="link" variant="highlight">
-                sign in
-              </TextLink>
-            </Link>{' '}
-            to submit
-          </Text>
-        )}
-      </div>
+      {loading ? (
+        <LoadingDots>Loading</LoadingDots>
+      ) : data?.user ? (
+        <SubmitInner user={data.user} />
+      ) : (
+        <Text color="secondary">
+          Please{' '}
+          <Link href="/login" passHref>
+            <TextLink color="link" variant="highlight">
+              sign in
+            </TextLink>
+          </Link>{' '}
+          to submit
+        </Text>
+      )}
     </Wrapper>
   );
 };
