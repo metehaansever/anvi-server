@@ -1,6 +1,5 @@
 import { MongoClient } from 'mongodb';
 
-const client = new MongoClient(process.env.MONGODB_URI);
 let indexesCreated = false;
 async function createIndexes(client) {
   if (indexesCreated) return client;
@@ -34,7 +33,14 @@ export async function getMongoClient() {
    * during API Route usage.
    * https://github.com/vercel/next.js/pull/17666
    */
-  client.connect().then((client) => createIndexes(client));
+  if (!global.mongoClientPromise) {
+    const client = new MongoClient(process.env.MONGODB_URI);
+    // client.connect() returns an instance of MongoClient when resolved
+    global.mongoClientPromise = client
+      .connect()
+      .then((client) => createIndexes(client));
+  }
+  return global.mongoClientPromise;
 }
 
 export async function getMongoDb() {
