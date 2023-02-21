@@ -23,7 +23,7 @@ export async function findSubmissionById(db, id) {
   return submissions[0];
 }
 
-export async function findSubmissions(db, before, by, limit = 10) {
+export async function findSubmissions(db, before, by, limit = 20) {
   return db
     .collection('submissions')
     .aggregate([
@@ -49,9 +49,19 @@ export async function findSubmissions(db, before, by, limit = 10) {
     .toArray();
 }
 
-export async function insertSubmission(db, { content, creatorId }) {
+export async function insertSubmission(
+  db,
+  { title, desc, name, email, affiliation, workdir, setup, run, creatorId }
+) {
   const submission = {
-    content,
+    title,
+    desc,
+    name,
+    email,
+    affiliation,
+    workdir,
+    setup,
+    run,
     creatorId,
     createdAt: new Date(),
   };
