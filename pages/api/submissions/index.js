@@ -25,9 +25,17 @@ handler.post(
   validateBody({
     type: 'object',
     properties: {
-      content: ValidateProps.submission.content,
+      title: ValidateProps.submission.title,
+      desc: ValidateProps.submission.desc,
+      name: ValidateProps.submission.name,
+      email: ValidateProps.submission.email,
+      affiliation: ValidateProps.submission.affiliation,
+      web: ValidateProps.submission.web,
+      workdir: ValidateProps.submission.workdir,
+      setup: ValidateProps.submission.setup,
+      run: ValidateProps.submission.run,
     },
-    required: ['content'],
+    required: ['title', 'desc', 'name', 'email', 'workdir', 'setup', 'run'],
     additionalProperties: false,
   }),
   async (req, res) => {
@@ -38,7 +46,15 @@ handler.post(
     const db = await getMongoDb();
 
     const submissions = await insertSubmission(db, {
-      content: req.body.content,
+      title: req.body.title,
+      desc: req.body.desc,
+      name: req.body.name,
+      email: req.body.email,
+      affiliation: req.body.affiliation,
+      web: req.body.web,
+      workdir: req.body.workdir,
+      setup: req.body.setup,
+      run: req.body.run,
       creatorId: req.user._id,
     });
 

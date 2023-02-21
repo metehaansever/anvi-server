@@ -10,29 +10,29 @@ import { useCallback, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 import styles from './SubmitForm.module.css';
 import { useSubmitPages } from '@/lib/submission/hook';
+import { useRouter } from 'next/router';
 
 const SubmitInner = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { mutate } = useSubmitPages();
+  const router = useRouter();
 
-  const {
-    titleRef,
-    descRef,
-    nameRef,
-    emailRef,
-    affiliationRef,
-    webRef,
-    workdirRef,
-    setupRef,
-    runRef,
-  } = useRef();
+  const titleRef = useRef();
+  const descRef = useRef();
+  const nameRef = useRef();
+  const emailRef = useRef();
+  const affiliationRef = useRef();
+  const webRef = useRef();
+  const workdirRef = useRef();
+  const setupRef = useRef();
+  const runRef = useRef();
 
   const onSubmit = useCallback(
     async (e) => {
       e.preventDefault();
       try {
         setIsLoading(true);
-        await fetcher('/api/submissions', {
+        const response = await fetcher('/api/submissions', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -48,9 +48,8 @@ const SubmitInner = () => {
           }),
         });
         toast.success('You have submit successfully');
-
-        // refresh submit lists
-        mutate();
+        router.reload('/submit');
+        mutate({ submission: response.body }, false);
       } catch (e) {
         toast.error(e.message);
       } finally {
@@ -63,7 +62,7 @@ const SubmitInner = () => {
   return (
     <Wrapper className={styles.root}>
       <div className={styles.main}>
-        <form className={styles.form} onSubmit={onSubmit}>
+        <form className={styles.form}>
           <div className={styles.leftside}>
             <div className={styles.project}>
               <h2 className={styles.heading} title="Choose your project Title">
@@ -110,6 +109,7 @@ const SubmitInner = () => {
                 placeholder="Email Address"
                 ariaLabel="Email Address"
                 size="large"
+                required
               />
               <Spacer size={0.5} axis="vertical" />
               <Input
@@ -172,7 +172,12 @@ const SubmitInner = () => {
         </form>
         <Spacer size={1.5} axis="vertical" />
         <div className={styles.btn}>
-          <Button type="success" loading={isLoading}>
+          <Button
+            onClick={onSubmit}
+            htmlType="submit"
+            type="success"
+            loading={isLoading}
+          >
             {' '}
             Submit{' '}
           </Button>

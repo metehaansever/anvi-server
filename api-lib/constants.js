@@ -13,6 +13,14 @@ export const ValidateProps = {
     content: { type: 'string', minLength: 1, maxLength: 280 },
   },
   submission: {
-    content: { type: 'string', minLength: 1, maxLength: 280 },
+    title: { type: 'string', minLength: 1, maxLength: 280 },
+    desc: { type: 'string', minLength: 1, maxLength: 280 },
+    name: { type: 'string', minLength: 1, maxLength: 280 },
+    email: { type: 'string', minLength: 1, maxLength: 280 },
+    affiliation: { type: 'string', minLength: 1, maxLength: 280 },
+    web: { type: 'string', minLength: 1, maxLength: 280 },
+    workdir: { type: 'string', minLength: 1, maxLength: 280 },
+    setup: { type: 'string', minLength: 1, maxLength: 280 },
+    run: { type: 'string', minLength: 1, maxLength: 280 },
   },
 };
