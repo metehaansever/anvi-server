@@ -20,6 +20,8 @@ const Hero = () => {
             alt="anvio dark"
             width={350}
             height={350}
+            priority="false"
+            placeholder="anviserver"
           />
         </div>
         <Container justifyContent="center" className={styles.buttons}>
