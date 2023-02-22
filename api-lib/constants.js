@@ -20,7 +20,7 @@ export const ValidateProps = {
     affiliation: { type: 'string', minLength: 1, maxLength: 280 },
     web: { type: 'string', minLength: 1, maxLength: 280 },
     workdir: { type: 'string', minLength: 1, maxLength: 280 },
-    setup: { type: 'string', minLength: 1, maxLength: 280 },
-    run: { type: 'string', minLength: 1, maxLength: 280 },
+    setup: { type: 'string', minLength: 1, maxLength: 500 },
+    run: { type: 'string', minLength: 1, maxLength: 500 },
   },
 };
