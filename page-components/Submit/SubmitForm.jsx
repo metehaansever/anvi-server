@@ -9,7 +9,7 @@ import Link from 'next/link';
 import { useCallback, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 import styles from './SubmitForm.module.css';
-import { useSubmitPages } from '@/lib/submission/hook';
+import { useSubmitPages } from '@/lib/submission/hooks';
 import { useRouter } from 'next/router';
 
 const SubmitInner = () => {
