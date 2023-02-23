@@ -1,3 +1,4 @@
+import React from 'react';
 import { useCurrentUser } from '@/lib/user';
 import { Button } from '@/components/Button';
 import { Text, TextLink } from '@/components/Text';
@@ -11,11 +12,18 @@ import toast from 'react-hot-toast';
 import styles from './SubmitForm.module.css';
 import { useSubmitPages } from '@/lib/submission/hooks';
 import { useRouter } from 'next/router';
+import { Modal, Row, Checkbox } from '@nextui-org/react';
 
 const SubmitInner = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { mutate } = useSubmitPages();
   const router = useRouter();
+  const [visible, setVisible] = React.useState(false);
+  const handler = () => setVisible(true);
+
+  const closeHandler = () => {
+    setVisible(false);
+  };
 
   const titleRef = useRef();
   const descRef = useRef();
@@ -62,7 +70,7 @@ const SubmitInner = () => {
   return (
     <Wrapper className={styles.root}>
       <div className={styles.main}>
-        <form className={styles.form}>
+        <form className={styles.form} id="yaml-form">
           <div className={styles.leftside}>
             <div className={styles.project}>
               <h2 className={styles.heading} title="Choose your project Title">
@@ -171,16 +179,56 @@ const SubmitInner = () => {
           </div>
         </form>
         <Spacer size={1.5} axis="vertical" />
-        <div className={styles.btn}>
-          <Button
-            onClick={onSubmit}
-            htmlType="submit"
-            type="success"
-            loading={isLoading}
-          >
-            {' '}
-            Submit{' '}
+        <div className={styles.modal_btn}>
+          <Button type="success" onClick={handler}>
+            Next
           </Button>
+          <Modal
+            closeButton
+            aria-labelledby="modal-title"
+            open={visible}
+            onClose={closeHandler}
+          >
+            <Modal.Header>
+              <Text className={styles.modal_header} color="secondary">
+                Submission Details
+              </Text>
+            </Modal.Header>
+            <Modal.Body>
+              <Text className={styles.modal_detail} color="secondary">
+                Before submit your project, please check the following details
+              </Text>
+              <Row>
+                <Checkbox>
+                  <Text className={styles.modal_body} color="secondary">
+                    Public
+                  </Text>
+                </Checkbox>
+              </Row>
+              <Row>
+                <Checkbox>
+                  <Text className={styles.modal_body} color="secondary">
+                    Share on Feed
+                  </Text>
+                </Checkbox>
+              </Row>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button type="secondary" onClick={closeHandler}>
+                Close
+              </Button>
+              <Button
+                form="yaml-form"
+                onClick={onSubmit}
+                htmlType="submit"
+                type="success"
+                loading={isLoading}
+              >
+                {' '}
+                Submit{' '}
+              </Button>
+            </Modal.Footer>
+          </Modal>
         </div>
       </div>
     </Wrapper>
