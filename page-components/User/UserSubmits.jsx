@@ -15,7 +15,6 @@ const UserSubmits = ({ user }) => {
   const submissions = data
     ? data.reduce((acc, val) => [...acc, ...val.submissions], [])
     : [];
-  console.log(submissions);
 
   return (
     <div className={styles.root}>
