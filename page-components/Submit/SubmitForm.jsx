@@ -16,7 +16,10 @@ import { Modal, Row, Checkbox } from '@nextui-org/react';
 
 const SubmitInner = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [isPublic, setIsPublic] = useState(false);
+  const [isShareOnFeed, setIsShareOnFeed] = useState(false);
   const { mutate } = useSubmitPages();
+
   const router = useRouter();
   const [visible, setVisible] = React.useState(false);
   const handler = () => setVisible(true);
@@ -34,6 +37,10 @@ const SubmitInner = () => {
   const workdirRef = useRef();
   const setupRef = useRef();
   const runRef = useRef();
+
+  function toggle(value) {
+    return !value;
+  }
 
   const onSubmit = useCallback(
     async (e) => {
@@ -199,14 +206,20 @@ const SubmitInner = () => {
                 Before submit your project, please check the following details
               </Text>
               <Row>
-                <Checkbox>
+                <Checkbox
+                  checked={isPublic}
+                  onChange={() => setIsPublic(toggle)}
+                >
                   <Text className={styles.modal_body} color="secondary">
                     Public
                   </Text>
                 </Checkbox>
               </Row>
               <Row>
-                <Checkbox>
+                <Checkbox
+                  checked={isShareOnFeed}
+                  onChange={() => setIsShareOnFeed(toggle)}
+                >
                   <Text className={styles.modal_body} color="secondary">
                     Share on Feed
                   </Text>
