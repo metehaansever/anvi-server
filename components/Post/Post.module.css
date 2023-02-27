@@ -45,6 +45,26 @@
   margin-top: 16px;
 }
 
+.title {
+  color: var(--accents-6);
+  font-weight: 600;
+  font-size: 1rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.desc {
+  color: var(--accents-6);
+  font-weight: 500;
+  font-size: 0.875rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
 .content {
   color: var(--accents-6);
   font-weight: 500;

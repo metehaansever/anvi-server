@@ -47,7 +47,7 @@ const SubmitInner = () => {
       e.preventDefault();
       try {
         setIsLoading(true);
-        const response = await fetcher('/api/submissions', {
+        const response = await fetcher('/api/posts', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({

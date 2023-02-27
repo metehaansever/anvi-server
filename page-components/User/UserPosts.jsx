@@ -31,7 +31,7 @@ const UserPosts = ({ user }) => {
         ))}
         <Container justifyContent="center">
           {isReachingEnd ? (
-            <Text color="secondary">No more posts are found</Text>
+            <Text color="secondary">No more submissions are found</Text>
           ) : (
             <Button
               variant="ghost"

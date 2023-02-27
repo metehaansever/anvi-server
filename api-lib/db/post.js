@@ -49,9 +49,19 @@ export async function findPosts(db, before, by, limit = 10) {
     .toArray();
 }
 
-export async function insertPost(db, { content, creatorId }) {
+export async function insertPost(
+  db,
+  { title, desc, name, email, affiliation, workdir, setup, run, creatorId }
+) {
   const post = {
-    content,
+    title,
+    desc,
+    name,
+    email,
+    affiliation,
+    workdir,
+    setup,
+    run,
     creatorId,
     createdAt: new Date(),
   };
