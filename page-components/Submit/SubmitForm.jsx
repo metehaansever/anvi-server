@@ -10,7 +10,7 @@ import Link from 'next/link';
 import { useCallback, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 import styles from './SubmitForm.module.css';
-import { useSubmitPages } from '@/lib/submission/hooks';
+import { usePostPages } from '@/lib/post/hooks';
 import { useRouter } from 'next/router';
 import { Modal, Row, Checkbox } from '@nextui-org/react';
 
@@ -18,7 +18,7 @@ const SubmitInner = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isPublic, setIsPublic] = useState(false);
   const [isShareOnFeed, setIsShareOnFeed] = useState(false);
-  const { mutate } = useSubmitPages();
+  const { mutate } = usePostPages();
 
   const router = useRouter();
   const [visible, setVisible] = React.useState(false);
@@ -71,7 +71,7 @@ const SubmitInner = () => {
         setIsLoading(false);
       }
     },
-    [mutate]
+    [mutate, router]
   );
 
   return (
