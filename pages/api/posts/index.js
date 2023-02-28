@@ -34,6 +34,7 @@ handler.post(
       workdir: ValidateProps.submission.workdir,
       setup: ValidateProps.submission.setup,
       run: ValidateProps.submission.run,
+      is_public: ValidateProps.submission.is_public,
     },
     required: ['title', 'desc', 'name', 'email', 'workdir', 'setup', 'run'],
     additionalProperties: false,
@@ -55,6 +56,7 @@ handler.post(
       workdir: req.body.workdir,
       setup: req.body.setup,
       run: req.body.run,
+      is_public: req.body.is_public,
       creatorId: req.user._id,
     });
 

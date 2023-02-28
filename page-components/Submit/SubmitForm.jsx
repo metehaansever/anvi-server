@@ -16,8 +16,7 @@ import { Modal, Row, Checkbox } from '@nextui-org/react';
 
 const SubmitInner = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [isPublic, setIsPublic] = useState(false);
-  const [isShareOnFeed, setIsShareOnFeed] = useState(false);
+  var [isPublic, setIsPublic] = useState(false);
   const { mutate } = usePostPages();
 
   const router = useRouter();
@@ -60,6 +59,7 @@ const SubmitInner = () => {
             workdir: workdirRef.current.value,
             setup: setupRef.current.value,
             run: runRef.current.value,
+            is_public: isPublic === isPublic ? true : false,
           }),
         });
         toast.success('You have submit successfully');
@@ -71,7 +71,7 @@ const SubmitInner = () => {
         setIsLoading(false);
       }
     },
-    [mutate, router]
+    [isPublic, mutate, router]
   );
 
   return (
@@ -203,25 +203,16 @@ const SubmitInner = () => {
             </Modal.Header>
             <Modal.Body>
               <Text className={styles.modal_detail} color="secondary">
-                Before submit your project, please check the following details
+                Before submit your project, please check the accessibility
+                status below
               </Text>
               <Row>
                 <Checkbox
                   checked={isPublic}
-                  onChange={() => setIsPublic(toggle)}
+                  onChange={() => (isPublic = setIsPublic(toggle))}
                 >
                   <Text className={styles.modal_body} color="secondary">
                     Public
-                  </Text>
-                </Checkbox>
-              </Row>
-              <Row>
-                <Checkbox
-                  checked={isShareOnFeed}
-                  onChange={() => setIsShareOnFeed(toggle)}
-                >
-                  <Text className={styles.modal_body} color="secondary">
-                    Share on Feed
                   </Text>
                 </Checkbox>
               </Row>

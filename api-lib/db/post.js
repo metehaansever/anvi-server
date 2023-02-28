@@ -51,7 +51,18 @@ export async function findPosts(db, before, by, limit = 10) {
 
 export async function insertPost(
   db,
-  { title, desc, name, email, affiliation, workdir, setup, run, creatorId }
+  {
+    title,
+    desc,
+    name,
+    email,
+    affiliation,
+    workdir,
+    setup,
+    run,
+    is_public,
+    creatorId,
+  }
 ) {
   const post = {
     title,
@@ -62,6 +73,7 @@ export async function insertPost(
     workdir,
     setup,
     run,
+    is_public,
     creatorId,
     createdAt: new Date(),
   };

@@ -12,34 +12,37 @@ const Post = ({ post, className }) => {
     if (diff < 1 * 60 * 1000) return 'Just now';
     return `${format(diff, true)} ago`;
   }, [post.createdAt]);
-  return (
-    <div className={clsx(styles.root, className)}>
-      <Link href={`/user/${post.creator.username}`}>
-        <a>
-          <Container className={styles.creator}>
-            <Avatar
-              size={36}
-              url={post.creator.profilePicture}
-              username={post.creator.username}
-            />
-            <Container column className={styles.meta}>
-              <p className={styles.name}>{post.creator.name}</p>
-              <p className={styles.username}>{post.creator.username}</p>
+  const is_public = post.is_public;
+  if (is_public) {
+    return (
+      <div className={clsx(styles.root, className)}>
+        <Link href={`/user/${post.creator.username}`}>
+          <a>
+            <Container className={styles.creator}>
+              <Avatar
+                size={36}
+                url={post.creator.profilePicture}
+                username={post.creator.username}
+              />
+              <Container column className={styles.meta}>
+                <p className={styles.name}>{post.creator.name}</p>
+                <p className={styles.username}>{post.creator.username}</p>
+              </Container>
             </Container>
-          </Container>
-        </a>
-      </Link>
-      <div className={styles.wrap}>
-        <p className={styles.title}>{post.title}</p>
-        <p className={styles.desc}>{post.desc}</p>
+          </a>
+        </Link>
+        <div className={styles.wrap}>
+          <p className={styles.title}>{post.title}</p>
+          <p className={styles.desc}>{post.desc}</p>
+        </div>
+        <div className={styles.wrap}>
+          <time dateTime={String(post.createdAt)} className={styles.timestamp}>
+            {timestampTxt}
+          </time>
+        </div>
       </div>
-      <div className={styles.wrap}>
-        <time dateTime={String(post.createdAt)} className={styles.timestamp}>
-          {timestampTxt}
-        </time>
-      </div>
-    </div>
-  );
+    );
+  }
 };
 
 export default Post;
