@@ -65,6 +65,16 @@
   -webkit-box-orient: vertical;
 }
 
+.launch{
+  display: flex;
+  align-items: center;
+}
+
+.core { 
+  display: flex;
+  justify-content: space-between;
+}
+
 .content {
   color: var(--accents-6);
   font-weight: 500;
