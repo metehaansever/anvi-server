@@ -5,6 +5,9 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import { useMemo } from 'react';
 import styles from './Post.module.css';
+import { ButtonLink } from '@/components/Button';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faRocket } from '@fortawesome/free-solid-svg-icons';
 
 const Post = ({ post, className }) => {
   const timestampTxt = useMemo(() => {
@@ -18,17 +21,26 @@ const Post = ({ post, className }) => {
       <div className={clsx(styles.root, className)}>
         <Link href={`/user/${post.creator.username}`}>
           <a>
-            <Container className={styles.creator}>
-              <Avatar
-                size={36}
-                url={post.creator.profilePicture}
-                username={post.creator.username}
-              />
-              <Container column className={styles.meta}>
-                <p className={styles.name}>{post.creator.name}</p>
-                <p className={styles.username}>{post.creator.username}</p>
+            <div className={styles.core}>
+              <Container className={styles.creator}>
+                <Avatar
+                  size={36}
+                  url={post.creator.profilePicture}
+                  username={post.creator.username}
+                />
+                <Container column className={styles.meta}>
+                  <p className={styles.name}>{post.creator.name}</p>
+                  <p className={styles.username}>{post.creator.username}</p>
+                </Container>
               </Container>
-            </Container>
+              <div className={styles.launch}>
+                <Link passHref href="/submit">
+                  <ButtonLink size="small" type="success" color="link">
+                    <FontAwesomeIcon icon={faRocket} />
+                  </ButtonLink>
+                </Link>
+              </div>
+            </div>
           </a>
         </Link>
         <div className={styles.wrap}>
