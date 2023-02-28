@@ -22,5 +22,6 @@ export const ValidateProps = {
     workdir: { type: 'string', minLength: 1, maxLength: 280 },
     setup: { type: 'string', minLength: 1, maxLength: 500 },
     run: { type: 'string', minLength: 1, maxLength: 500 },
+    is_public: { type: 'boolean' },
   },
 };

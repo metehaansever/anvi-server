@@ -10,15 +10,14 @@ import Link from 'next/link';
 import { useCallback, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 import styles from './SubmitForm.module.css';
-import { useSubmitPages } from '@/lib/submission/hooks';
+import { usePostPages } from '@/lib/post/hooks';
 import { useRouter } from 'next/router';
 import { Modal, Row, Checkbox } from '@nextui-org/react';
 
 const SubmitInner = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [isPublic, setIsPublic] = useState(false);
-  const [isShareOnFeed, setIsShareOnFeed] = useState(false);
-  const { mutate } = useSubmitPages();
+  var [isPublic, setIsPublic] = useState(false);
+  const { mutate } = usePostPages();
 
   const router = useRouter();
   const [visible, setVisible] = React.useState(false);
@@ -47,7 +46,7 @@ const SubmitInner = () => {
       e.preventDefault();
       try {
         setIsLoading(true);
-        const response = await fetcher('/api/submissions', {
+        const response = await fetcher('/api/posts', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -60,6 +59,7 @@ const SubmitInner = () => {
             workdir: workdirRef.current.value,
             setup: setupRef.current.value,
             run: runRef.current.value,
+            is_public: isPublic === isPublic ? true : false,
           }),
         });
         toast.success('You have submit successfully');
@@ -71,7 +71,7 @@ const SubmitInner = () => {
         setIsLoading(false);
       }
     },
-    [mutate]
+    [isPublic, mutate, router]
   );
 
   return (
@@ -203,25 +203,16 @@ const SubmitInner = () => {
             </Modal.Header>
             <Modal.Body>
               <Text className={styles.modal_detail} color="secondary">
-                Before submit your project, please check the following details
+                Before submit your project, please check the accessibility
+                status below
               </Text>
               <Row>
                 <Checkbox
                   checked={isPublic}
-                  onChange={() => setIsPublic(toggle)}
+                  onChange={() => (isPublic = setIsPublic(toggle))}
                 >
                   <Text className={styles.modal_body} color="secondary">
                     Public
-                  </Text>
-                </Checkbox>
-              </Row>
-              <Row>
-                <Checkbox
-                  checked={isShareOnFeed}
-                  onChange={() => setIsShareOnFeed(toggle)}
-                >
-                  <Text className={styles.modal_body} color="secondary">
-                    Share on Feed
                   </Text>
                 </Checkbox>
               </Row>
