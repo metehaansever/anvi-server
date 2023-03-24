@@ -59,7 +59,7 @@ const SubmitInner = () => {
             workdir: workdirRef.current.value,
             setup: setupRef.current.value,
             run: runRef.current.value,
-            is_public: isPublic === isPublic ? true : false,
+            is_public: isPublic === true ? true : false,
           }),
         });
         toast.success('You have submit successfully');
