@@ -16,10 +16,6 @@ Go to the project directory
 
 Checkout the Branch
 
-```bash
-  git checkout new-anviserver
-```
-
 Install the packages
 
 ```bash
